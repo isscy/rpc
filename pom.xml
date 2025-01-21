@@ -11,6 +11,7 @@
     <modules>
         <module>rpc-annotation</module>
         <module>rpc-common</module>
+        <module>rpc-test</module>
     </modules>
 
     <!--<parent>
@@ -27,7 +28,6 @@
     </properties>
 
 
-
     <dependencies>
 
 
@@ -38,8 +38,6 @@
             <version>2.0.16</version>
             <!--<scope>test</scope>-->
         </dependency>
-
-
 
 
         <!-- Spring -->
@@ -53,23 +51,23 @@
     </dependencies>
 
 
-
-
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <compilerArgs><!--解决SpringBoot 3.2 Parameter Name Retention 问题-->
-                        <arg>-parameters</arg>
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <compilerArgs><!--解决SpringBoot 3.2 Parameter Name Retention 问题-->
+                            <arg>-parameters</arg>
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <!--<build>
