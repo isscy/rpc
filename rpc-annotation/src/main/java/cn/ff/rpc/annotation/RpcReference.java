@@ -1,4 +1,4 @@
-package java.cn.ff.rpc.annotation;
+package cn.ff.rpc.annotation;
 
 
 import java.lang.annotation.ElementType;

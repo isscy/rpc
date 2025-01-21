@@ -1,5 +1,7 @@
-package java.cn.ff.rpc.annotation;
+package cn.ff.rpc.annotation;
 
+
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
