@@ -12,6 +12,7 @@
         <module>rpc-annotation</module>
         <module>rpc-common</module>
         <module>rpc-test</module>
+        <module>rpc-provider</module>
     </modules>
 
     <!--<parent>
@@ -25,12 +26,22 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>23</java.version>
         <spring.version>6.2.2</spring.version>
+        <netty.version>4.1.117.Final</netty.version>
+        <commons.lang3.version>3.12.0</commons.lang3.version>
     </properties>
 
 
     <dependencies>
 
 
+
+
+        <!-- Netty -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
         <!-- SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -47,6 +58,12 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!--Apache Commons lang3-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang3.version}</version>
+        </dependency>
 
     </dependencies>
 
