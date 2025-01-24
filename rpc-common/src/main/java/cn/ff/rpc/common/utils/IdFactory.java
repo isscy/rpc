@@ -1,4 +1,4 @@
-package cn.ff.rpc.common.scanner;
+package cn.ff.rpc.common.utils;
 
 import java.util.concurrent.atomic.AtomicLong;
 

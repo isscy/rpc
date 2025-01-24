@@ -1,7 +1,8 @@
 package cn.ff.rpc.protocol.base;
 
+
 import cn.ff.rpc.annotation.RpcConstants;
-import cn.ff.rpc.common.scanner.IdFactory;
+import cn.ff.rpc.common.utils.IdFactory;
 import cn.ff.rpc.protocol.enumeration.RpcType;
 
 /**

@@ -1,7 +1,6 @@
-package cn.ff.rpc.common.scanner.reference;
+package cn.ff.rpc.common.scanner;
 
 import cn.ff.rpc.annotation.RpcReference;
-import cn.ff.rpc.common.scanner.ClassScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

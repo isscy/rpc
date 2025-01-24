@@ -14,7 +14,7 @@ import java.io.Serializable;
  * |           序列化类型 16byte      | 数据长度 4byte    |
  * +---------------------------------------------------------------+
  */
-@Data
+
 public class RpcHeader implements Serializable {
     @Serial
     private static final long serialVersionUID = 10086;
@@ -49,4 +49,51 @@ public class RpcHeader implements Serializable {
     private int msgLen;
 
 
+    public short getMagic() {
+        return magic;
+    }
+
+    public void setMagic(short magic) {
+        this.magic = magic;
+    }
+
+    public byte getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(byte msgType) {
+        this.msgType = msgType;
+    }
+
+    public byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(byte status) {
+        this.status = status;
+    }
+
+    public long getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(long requestId) {
+        this.requestId = requestId;
+    }
+
+    public String getSerializationType() {
+        return serializationType;
+    }
+
+    public void setSerializationType(String serializationType) {
+        this.serializationType = serializationType;
+    }
+
+    public int getMsgLen() {
+        return msgLen;
+    }
+
+    public void setMsgLen(int msgLen) {
+        this.msgLen = msgLen;
+    }
 }

@@ -1,6 +1,6 @@
 package cn.ff.rpc.provider;
 
-import cn.ff.rpc.common.scanner.server.RpcServiceScanner;
+import cn.ff.rpc.common.scanner.RpcServiceScanner;
 import cn.ff.rpc.provider.common.server.base.BaseServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
