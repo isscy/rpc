@@ -1,5 +1,7 @@
 package cn.ff.rpc.provider.common.server.base;
 
+import cn.ff.rpc.protocol.codec.RpcDecoder;
+import cn.ff.rpc.protocol.codec.RpcEncoder;
 import cn.ff.rpc.provider.common.handler.RpcProviderHandler;
 import cn.ff.rpc.provider.common.server.api.Server;
 import io.netty.bootstrap.ServerBootstrap;
@@ -56,10 +58,10 @@ public class BaseServer implements Server {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline()
-                                    //由于目前为止还未实现具体的网络传输协议和数据的编解码
-                                    // 所以这里暂时使用的编解码类为Netty自带的StringEncoder类和StringDecoder类
-                                    .addLast(new StringDecoder())
-                                    .addLast(new StringEncoder())
+                                    //未实现具体的网络传输协议和数据的编解码时：使用的编解码类为Netty自带的StringEncoder类和StringDecoder类
+                                    // 后来使用自定义的编码解码
+                                    .addLast(new RpcDecoder())
+                                    .addLast(new RpcEncoder())
                                     // 将RpcProviderHandler对象添加到Netty的数据传递链中
                                     // 这样，自定义的RpcProviderHandler类就能够收到外界传递的数据
                                     .addLast(new RpcProviderHandler(handlerMap));

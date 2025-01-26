@@ -27,6 +27,12 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>cn.ff.rpc</groupId>
+            <artifactId>rcp-protocol</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
     </dependencies>
 
 
