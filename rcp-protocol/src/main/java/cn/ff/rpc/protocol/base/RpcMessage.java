@@ -12,10 +12,10 @@ public class RpcMessage implements Serializable {
     /*
      * 是否单向发送
      */
-    private boolean oneway;
+    private Boolean oneway;
     /*
      * 是否异步调用
      */
-    private boolean async;
+    private Boolean async;
 
 }
