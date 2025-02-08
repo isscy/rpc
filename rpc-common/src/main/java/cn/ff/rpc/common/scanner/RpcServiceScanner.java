@@ -1,6 +1,7 @@
 package cn.ff.rpc.common.scanner;
 
 import cn.ff.rpc.annotation.RpcService;
+import cn.ff.rpc.common.helper.RpcServiceHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +32,7 @@ public class RpcServiceScanner extends ClassScanner {
                 RpcService rpcService = clazz.getAnnotation(RpcService.class);
                 if (rpcService != null) { //优先使用interfaceClass, interfaceClass的name为空，再使用interfaceClassName
                     String serviceName = getServiceName(rpcService);
-                    String key = serviceName.concat(rpcService.version()).concat(rpcService.group());
+                    String key = RpcServiceHelper.buildServiceKey(serviceName, rpcService.version(), rpcService.group());
                     handlerMap.put(key, clazz.getDeclaredConstructor().newInstance());
                 }
             } catch (Exception e) {
