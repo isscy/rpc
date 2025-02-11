@@ -29,6 +29,7 @@ import java.util.Map;
 public class BaseServer implements Server {
     private final Logger logger = LoggerFactory.getLogger(BaseServer.class);
 
+    private String reflectType;
 
     //主机域名或者IP地址
     protected String host = "127.0.0.1";
@@ -38,14 +39,14 @@ public class BaseServer implements Server {
     protected Map<String, Object> handlerMap = new HashMap<>();
 
 
-    public BaseServer(String serverAddress) {
-        if (!StringUtils.isEmpty(serverAddress)) {
+    public BaseServer(String serverAddress, String reflectType){
+        if (!StringUtils.isEmpty(serverAddress)){
             String[] serverArray = serverAddress.split(":");
             this.host = serverArray[0];
             this.port = Integer.parseInt(serverArray[1]);
         }
+        this.reflectType = reflectType;
     }
-
 
     @Override
     public void startNettyServer() {
@@ -64,7 +65,7 @@ public class BaseServer implements Server {
                                     .addLast(new RpcEncoder())
                                     // 将RpcProviderHandler对象添加到Netty的数据传递链中
                                     // 这样，自定义的RpcProviderHandler类就能够收到外界传递的数据
-                                    .addLast(new RpcProviderHandler(handlerMap));
+                                    .addLast(new RpcProviderHandler(reflectType,handlerMap));
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)
