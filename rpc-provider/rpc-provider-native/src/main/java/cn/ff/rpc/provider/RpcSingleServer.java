@@ -13,8 +13,6 @@ public class RpcSingleServer extends BaseServer {
 
 
     public RpcSingleServer(String serverAddress, String scanPackage, String reflectType) {
-
-
         //调用父类构造方法
         super(serverAddress, reflectType);
         try {
