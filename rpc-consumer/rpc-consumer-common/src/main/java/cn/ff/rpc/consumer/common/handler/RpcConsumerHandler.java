@@ -1,5 +1,6 @@
 package cn.ff.rpc.consumer.common.handler;
 
+import cn.ff.rpc.protocol.base.RpcHeader;
 import cn.ff.rpc.protocol.base.RpcProtocol;
 import cn.ff.rpc.protocol.base.RpcRequest;
 import cn.ff.rpc.protocol.base.RpcResponse;
@@ -13,9 +14,15 @@ import lombok.extern.slf4j.Slf4j;
 import io.netty.channel.Channel;
 
 import java.net.SocketAddress;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcResponse>> {
+
+    //存储请求ID与RpcResponse协议的映射关系
+    private Map<Long, RpcProtocol<RpcResponse>> pendingResponse = new ConcurrentHashMap<>();
+
     @Getter
     private volatile Channel channel;
     @Getter
@@ -40,19 +47,31 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     }
 
     /**
-     * Netty接收数据
+     * Netty接收数据：服务消费者接收到服务提供者响应的结果数据RpcResponse协议对象
      */
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcProtocol<RpcResponse> protocol) throws Exception {
+        if (protocol == null) {
+            return;
+        }
         log.info("服务消费者接收到的数据===>>>{}", JSONObject.toJSONString(protocol));
+        long requestId = protocol.getHeader().getRequestId();
+        pendingResponse.put(requestId, protocol);
     }
 
     /**
      * 服务消费者向服务提供者发送请求
      */
-    public void sendRequest(RpcProtocol<RpcRequest> protocol) {
+    public Object sendRequest(RpcProtocol<RpcRequest> protocol) {
         log.info("服务消费者发送的数据===>>>{}", JSONObject.toJSONString(protocol));
         channel.writeAndFlush(protocol);
+        long requestId = protocol.getHeader().getRequestId();
+        while (true) { //异步转同步
+            RpcProtocol<RpcResponse> responseRpcProtocol = pendingResponse.remove(requestId);
+            if (responseRpcProtocol != null) {
+                return responseRpcProtocol.getBody().getResult();
+            }
+        }
     }
 
     public void close() {
